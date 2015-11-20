@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MVCOdysseyTwo.Models;
+using System.Data.Entity;
 
 namespace MVCOdysseyTwo.Controllers
 {
@@ -12,7 +13,12 @@ namespace MVCOdysseyTwo.Controllers
         // GET: Actor
         public ActionResult Index()
         {
-            return View();
+            using(var db= new MovieDBContext())
+            {
+                var actors = db.Actors.ToList();
+                return View(actors);
+            }
+            
         }
 
         
@@ -41,6 +47,66 @@ namespace MVCOdysseyTwo.Controllers
         }
 
         //Edit
-        
+        [HttpGet]
+        public ActionResult Edit(int id = 0)
+        {
+            using (var db = new MovieDBContext())
+            {
+                Actor actor = db.Actors.Find(id);
+                if (actor == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(actor);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Actor actorToUpdate)
+        {
+
+            if (ModelState.IsValid)
+            {
+                using (var db = new MovieDBContext())
+                {
+                    db.Entry(actorToUpdate).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            return View(actorToUpdate);
+        }
+
+        //Delete
+        [HttpGet]
+        public ActionResult Delete(int id = 0)
+        {
+            using (var db = new MovieDBContext())
+            {
+                Actor actor = db.Actors.Find(id);
+                if (actor == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(actor);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Actor actorToDelete)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new MovieDBContext())
+                {
+                    db.Entry(actorToDelete).State = System.Data.Entity.EntityState.Deleted;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            return View(actorToDelete);
+        }
     }
 }

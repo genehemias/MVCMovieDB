@@ -46,7 +46,8 @@ namespace MVCOdysseyTwo.Controllers
             return View(movieFromView);
         }
 
-        //these are the Edit and Delete actions from the tutorial. They result in a DbUpdateConcurrency Exception (they don't work).
+        //these are the Edit and Delete actions from the tutorial. They result in a DbUpdateConcurrency Exception (they don't work)
+        //because the views lacked @Html.HiddenFor(model.=>model.MovieID)
         [HttpGet]
         public ActionResult Edit(int id = 0)
         {

@@ -1,0 +1,29 @@
+﻿@model MVCOdysseyTwo.Models.Actor
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm("Edit", "Actor", FormMethod.Post, new { @class = "form-horizontal" }))
+{ 
+    <h2>Edit Actor</h2>
+    <div class="form-group">
+        @Html.HiddenFor(model => model.ActorID)
+        @Html.LabelFor(m=>m.Name, new { @class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m=>m.Name, new { @class="Form control"})
+            @Html.ValidationMessageFor(m=>m.Name)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m=>m.ShortBio, new { @class="col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m=>m.ShortBio, new { @class="form-control"})
+            @Html.ValidationMessageFor(m=>m.ShortBio)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2" "col-md-10">
+            <input type="submit" class="btn btn-default" value="Edit Actor" />
+        </div>
+    </div>
+}

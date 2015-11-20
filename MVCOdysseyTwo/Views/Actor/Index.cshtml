@@ -11,12 +11,17 @@
         <th>Name</th>
         <th>Biographical notes</th>
     </tr>
-    @foreach (var actor in Model)
-    {
-        <tr>
-            <td>@actor.Name</td>
-            <td>@actor.ShortBio</td>
-        </tr>
-    }
+        @foreach (var actor in Model)
+        {
+            <tr>
+                <td>@actor.Name</td>
+                <td>@actor.ShortBio</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = @actor.ActorID })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = @actor.ActorID })</td>
+            </tr>
+        }
 </table>
 
+<div class="form-group">
+    @Html.ActionLink("Add an Actor", "Add", "Actor")
+</div>

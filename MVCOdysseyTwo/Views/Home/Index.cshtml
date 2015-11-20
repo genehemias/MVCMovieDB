@@ -1,0 +1,11 @@
+﻿@*This is the HomeController's Index View*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Home Page</h2>
+<div class="form-group">
+    <div class="btn-link">@Html.ActionLink("See All Movies", "Index", "Movie")</div>
+    <div class="btn-link">@Html.ActionLink("See All Actors", "Index", "Actor")</div>
+</div>
