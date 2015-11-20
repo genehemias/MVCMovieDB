@@ -9,6 +9,7 @@
 {
     <h2>Delete Movie</h2>
     <div class="form-group">
+    @Html.HiddenFor(model => model.MovieID)
         @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
